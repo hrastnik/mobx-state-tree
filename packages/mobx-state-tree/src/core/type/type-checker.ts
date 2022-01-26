@@ -37,7 +37,7 @@ export type IValidationResult = IValidationError[]
 
 function safeStringify(value: any) {
     try {
-        return JSON.stringify(value)
+        return JSON.stringify(value, null, 2)
     } catch (e) {
         // istanbul ignore next
         return `<Unserializable: ${e}>`
@@ -90,9 +90,9 @@ function toErrorString(error: IValidationError): string {
         (type
             ? isPrimitiveType(type) || isPrimitive(value)
                 ? `.`
-                : `, expected an instance of \`${
-                      (type as IAnyType).name
-                  }\` or a snapshot like \`${(type as IAnyType).describe()}\` instead.` +
+                : `, expected an instance of \`${(type as IAnyType).name}\` or a snapshot like \`${(
+                      type as IAnyType
+                  ).describe()}\` instead.` +
                   (isSnapshotCompatible
                       ? " (Note that a snapshot of the provided value is compatible with the targeted type)"
                       : "")

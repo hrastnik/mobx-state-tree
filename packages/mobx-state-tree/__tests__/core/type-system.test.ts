@@ -356,7 +356,15 @@ if (process.env.NODE_ENV !== "production") {
             // at path "/todos/1/setTitle" value \`"hello"\` is not assignable  (Action properties should not be provided in the snapshot).
             // at path "/amount" value \`1\` is not assignable  (Computed properties should not be provided in the snapshot).
             // at path "/getAmount" value \`"hello"\` is not assignable  (View properties should not be provided in the snapshot).`
-            `[mobx-state-tree] Error while converting \`{"todos":{"1":{"title":true,"setTitle":"hello"}},"amount":1,"getAmount":"hello"}\` to \`AnonymousModel\`:
+            `[mobx-state-tree] Error while converting \`${JSON.stringify(
+                {
+                    todos: { "1": { title: true, setTitle: "hello" } },
+                    amount: 1,
+                    getAmount: "hello"
+                },
+                null,
+                2
+            )}\` to \`AnonymousModel\`:
 
     at path "/todos/1/title" value \`true\` is not assignable to type: \`string\` (Value is not a string).`
         )

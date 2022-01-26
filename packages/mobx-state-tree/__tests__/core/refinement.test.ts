@@ -23,12 +23,24 @@ if (process.env.NODE_ENV !== "production") {
         expect(() => {
             Factory.create({ number: "givenStringInstead" } as any)
         }).toThrowError(
-            `[mobx-state-tree] Error while converting \`{\"number\":\"givenStringInstead\"}\` to \`AnonymousModel\`:\n\n    at path \"/number\" value \`\"givenStringInstead\"\` is not assignable to type: \`positive number\` (Value is not a number).`
+            `[mobx-state-tree] Error while converting \`${JSON.stringify(
+                {
+                    number: "givenStringInstead"
+                },
+                null,
+                2
+            )}\` to \`AnonymousModel\`:\n\n    at path \"/number\" value \`\"givenStringInstead\"\` is not assignable to type: \`positive number\` (Value is not a number).`
         )
         expect(() => {
             Factory.create({ number: -4 })
         }).toThrowError(
-            `[mobx-state-tree] Error while converting \`{\"number\":-4}\` to \`AnonymousModel\`:\n\n    at path \"/number\" value \`-4\` is not assignable to type: \`positive number\` (Value does not respect the refinement predicate).`
+            `[mobx-state-tree] Error while converting \`${JSON.stringify(
+                {
+                    number: -4
+                },
+                null,
+                2
+            )}\` to \`AnonymousModel\`:\n\n    at path \"/number\" value \`-4\` is not assignable to type: \`positive number\` (Value does not respect the refinement predicate).`
         )
     })
     test("it should throw custom error message with failing predicate is given", () => {
@@ -42,12 +54,24 @@ if (process.env.NODE_ENV !== "production") {
         expect(() => {
             Factory.create({ number: "givenStringInstead" } as any)
         }).toThrowError(
-            `[mobx-state-tree] Error while converting \`{\"number\":\"givenStringInstead\"}\` to \`AnonymousModel\`:\n\n    at path \"/number\" value \`\"givenStringInstead\"\` is not assignable to type: \`number\` (Value is not a number).`
+            `[mobx-state-tree] Error while converting \`${JSON.stringify(
+                {
+                    number: "givenStringInstead"
+                },
+                null,
+                2
+            )}\` to \`AnonymousModel\`:\n\n    at path \"/number\" value \`\"givenStringInstead\"\` is not assignable to type: \`number\` (Value is not a number).`
         )
         expect(() => {
             Factory.create({ number: -4 })
         }).toThrowError(
-            `[mobx-state-tree] Error while converting \`{\"number\":-4}\` to \`AnonymousModel\`:\n\n    at path "/number" value \`-4\` is not assignable to type: \`number\` (A positive number was expected).`
+            `[mobx-state-tree] Error while converting \`${JSON.stringify(
+                {
+                    number: -4
+                },
+                null,
+                2
+            )}\` to \`AnonymousModel\`:\n\n    at path "/number" value \`-4\` is not assignable to type: \`number\` (A positive number was expected).`
         )
     })
 }
